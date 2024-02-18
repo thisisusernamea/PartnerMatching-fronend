@@ -1,20 +1,21 @@
 import { createApp } from 'vue'
 import App from './App.vue'
+import 'vant/lib/index.css'
 import {
     Button,
     Cell,
     CellGroup,
-    Col,
+    Col, DatePicker,
     Divider,
     Field,
     Form,
     Icon,
-    NavBar,
+    NavBar, PickerGroup,
     Row,
     Space,
     Tabbar,
     TabbarItem,
-    Tag
+    Tag, TimePicker, Toast
 } from 'vant';
 import * as VueRouter from 'vue-router';
 import routes from "./configs/route.ts";
@@ -42,6 +43,10 @@ app.use(CellGroup);
 app.use(Form);
 app.use(Field);
 app.use(CellGroup);
+app.use(DatePicker);
+app.use(PickerGroup);
+app.use(TimePicker);
+app.use(Toast);
 /*转换unix时间戳*/
 app.config.globalProperties.$filters = {
     formatTime(timestamp) {
