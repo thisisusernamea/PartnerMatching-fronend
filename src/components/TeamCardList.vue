@@ -48,6 +48,36 @@
       }
     })
   }
+  /**
+   * 退出队伍
+   * @param id
+   */
+  const doQuitTeam = async (id:number) =>{
+    const res = await myAxios.post('/team/quit',{
+      teamId:id
+    })
+    if(res?.code === 0){
+      showSuccessToast("退出队伍成功");
+
+    }else {
+      showFailToast('退出队伍失败' + (res.description ? ` , ${res.description}` : ''));
+    }
+  }
+  /**
+   * 解散队伍
+   * @param id
+   */
+  const doDeleteTeam = async (id:number) =>{
+    const res = await myAxios.post('/team/delete',{
+      id,
+    })
+    if(res?.code === 0){
+      showSuccessToast("解散队伍成功");
+
+    }else {
+      showFailToast('解散队伍失败' + (res.description ? ` , ${res.description}` : ''));
+    }
+  }
 </script>
 
 <template>
@@ -74,9 +104,27 @@
         </div>
       </template>
       <template #footer>
-        <van-button size="mini" type="primary" plain @click="doJoinTeam(team.id)">加入队伍</van-button>
+        <van-button v-if="team.userId !== currentUser?.id && !team.hasJoin"
+                    size="mini" type="primary"
+                    plain
+                    @click="doJoinTeam(team.id)">
+                    加入队伍
+        </van-button>
         <van-button v-if="team.userId === currentUser?.id" size="mini" plain
                     @click="doUpdateTeam(team.id)">更新队伍
+        </van-button>
+        <van-button v-if="team.userId !== currentUser?.id && team.hasJoin"
+                    size="mini"
+                    plain
+                    @click="doQuitTeam(team.id)">
+                    退出队伍
+        </van-button>
+        <van-button v-if="team.userId === currentUser?.id"
+                    size="mini"
+                    plain
+                    type="danger"
+                    @click="doDeleteTeam(team.id)">
+                    解散队伍
         </van-button>
       </template>
     </van-card>

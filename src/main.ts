@@ -12,7 +12,7 @@ import {
     Icon,
     NavBar, PickerGroup,
     Row,
-    Space,
+    Space, Switch,
     Tabbar,
     TabbarItem,
     Tag, TimePicker, Toast
@@ -47,6 +47,7 @@ app.use(DatePicker);
 app.use(PickerGroup);
 app.use(TimePicker);
 app.use(Toast);
+app.use(Switch);
 /*转换unix时间戳*/
 app.config.globalProperties.$filters = {
     formatTime(timestamp) {

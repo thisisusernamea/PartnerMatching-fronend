@@ -20,7 +20,7 @@
    * @param val
    */
   const listTeam = async (val='') =>{
-    const res = await myAxios.get('/team/list',{
+    const res = await myAxios.get('/team/list/my/create',{
       params:{
         searchText:val,
         pageNum:1,
@@ -32,16 +32,11 @@
       showFailToast("加载队伍失败,请刷新重试");
     }
   }
-  /**
-   * 页面加载时指触发一次
-   */
+  //页面加载时指触发一次
   onMounted( () =>{
     listTeam();
   })
-  /**
-   * 搜索队伍事件
-   * @param val
-   */
+  //搜索队伍事件
   const onSearch = (val) => {
     listTeam(val);
   };
